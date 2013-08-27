@@ -10,6 +10,7 @@ class DBCon
 	private Properties p;
 	private Statement st;
 	private ResultSet rs;
+	private ResultSetMetaData rsmd;
 	DatabaseMetaData md;
 
 	public DBCon() throws ClassNotFoundException, SQLException
@@ -23,22 +24,43 @@ class DBCon
 		st = c.createStatement();
 		md = c.getMetaData();
 	}
-	public ResultSet getAllRecords(String tablename) throws SQLException
+	public ResultSet getAllRecords(String table) throws SQLException
 	{
-		//Method gets all the records but does not return the result set for GUI yet.
-		String query = "SELECT * FROM " + tablename + ";";
+		//Method gets all the records and returns result set.
+		String query = "SELECT * FROM " + table + ";";
 		rs = st.executeQuery(query);
 		int rec = 0;
 		while(rs.next())
 		{
-			System.out.println("-------------------------------------------");
-			System.out.println("Record #" + (rec+1) + ":");
-			System.out.println("ID:   " + rs.getString("ID") + "\n" +
-					"First Name: " + rs.getString("FNAME") + "\n" + 
-					"Last Name: " + rs.getString("LNAME") + "\n" +
-					"Address: " + rs.getString("ADDRESS") + "\n" +
-					"Marks: " + rs.getString("MARKS") + "\n" +
-					"Contact Info: " + rs.getString("CONTACT"));
+			if(table == "Class1" ||
+			   table == "Class2" ||
+			   table == "Class3" ||
+			   table == "Class4" ||
+			   table == "Class5")
+			{
+				System.out.println("-------------------------------------------");
+				System.out.println("Record #" + (rec+1) + ":");
+				System.out.println("ID:   " + rs.getString("ID") + "\n" +
+								   "First Name: " + rs.getString("FNAME") + "\n" + 
+								   "Last Name: " + rs.getString("LNAME") + "\n" +
+								   "Address: " + rs.getString("ADDRESS") + "\n" +
+				   				   "Marks: " + rs.getString("MARKS") + "\n" +
+						           "Contact Info: " + rs.getString("CONTACT"));
+			}
+			else
+			{
+				//This will display for literaly any other table
+				rsmd = rs.getMetaData();
+				String[] columnnames;
+
+				System.out.println("-------------------------------------------");
+				System.out.println("Record #" + (rec + 1) + ": ");
+				for(int i = 0; i < rsmd.getColumnCount(); i++)
+				{
+					System.out.println(rsmd.getColumnName(i) + ": " + 
+							rs.getString(rsmd.getColumnName(i)));
+				}
+			}
 			rec++;
 		}
 		System.out.println("-------------------------------------------");
