@@ -72,26 +72,34 @@ class DBCon
 		}
 		st.executeUpdate(query);
 	}
-	public void delRecord(int id, String table) throws SQLException
+	public boolean delRecord(String table, int id) throws SQLException
 	{
 		//Deletes record from DB
-		String query = "DELETE FROM " + table + " WHERE id=" + id + ";";
-		boolean success = st.execute("SELECT * FROM " + table + 
-				" WHERE id=" + id+ ";");
-		if(success)
+		String query = "";
+		if(checkRecord(table, id))
 		{
-			st.execute(query);
-			System.out.println("Record Deleted Successfully!");
+			query = String.format("DELETE FROM %s WHERE ID=%d", table, id);
+			st.executeUpdate(query);
+			return true;
 		}
 		else
 		{
-			System.out.println("No such record.");
+			return false;
 		}
 	}
+	public boolean checkRecord(String table, int id) throws SQLException
+	{
+		String query = String.format("SELECT * FROM %s WHERE ID=%d", table, id);
+		boolean available = st.execute(query);
+		if(available)
+		{
+			System.out.printf("ID: %d exists in table: %s!\n", id, table);
+		}
+		else
+		{
+			System.out.printf("There is no such record as ID: %d in table %s",
+								id, table);
+		}
+		return available;
+	}
 }
-/*
- * READ THIS!
- * the above is not suitable for the db we have, alot of configuration and designing needed
- * vintage?
- * :P
- */
