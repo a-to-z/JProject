@@ -8,9 +8,17 @@ public class Main
 		try
 		{
 			DBCon so = new DBCon();
-			String[] recs = { "Okay" };
-			so.setRecord(12, recs);
-			so.getAllRecords("trial");
+			so.getAllRecords("Class1");
+
+			String[] recs = {"1", 
+							"Umair", 
+							"Chachar",
+							"Clifton",
+							"100",
+							"0321-0333"};
+			so.setRecord("Class1", recs);
+
+			so.getAllRecords("Class1");
 		}
 		catch(ClassNotFoundException e)
 		{
