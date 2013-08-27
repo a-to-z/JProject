@@ -56,9 +56,9 @@ class DBCon
 		String query = "";
 		if (table == "Class1" ||
 			table == "Class2" ||
-			table == "Class 3" ||
-			table == "Class 4" ||
-			table == "Class 5")
+			table == "Class3" ||
+			table == "Class4" ||
+			table == "Class5")
 		{
 			query = String.format("INSERT INTO %s VALUES" +
 									"(%d, '%s', '%s', '%s', %d, '%s');",
