@@ -71,19 +71,7 @@ public class GUI extends JFrame implements ActionListener
         //check on the window status.
         //we don't want the con to be open constantly
         //if you get what i mean
-        miAbout.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                if(e.getSource() == miAbout)
-                {
-                    JOptionPane.showMessageDialog(null,
-                            "Software underconstruction by Umair" +
-                                    " and Ammar. Might have more team members lol");
-                }
-            }
-        });
+        miAbout.addActionListener(this);
         addWindowListener(new WindowAdapter()
         {
             @Override
@@ -195,24 +183,7 @@ public class GUI extends JFrame implements ActionListener
         }
     }
 
-    JLabel columns[] = {};
-    JTextField values[] = {};
-    JButton bEnter;
-
-    public void insertGUI(){
-        JFrame ins = new JFrame("Insert");
-        Container c = getContentPane();
-        c.setLayout(null);
-		
-		
-		/*try{
-			rs = con.getAllRecords();
-		}catch(SQLException sqle){
-			System.out.println(sqle);
-		}*/
-
-    }
-
+    
     public static DefaultTableModel buildTableModel(ResultSet rs) throws SQLException {
 
         ResultSetMetaData metaData = rs.getMetaData();

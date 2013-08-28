@@ -10,8 +10,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 
-public class Forms {
+public class Forms extends JFrame {
 
+	
 }
 
 
