@@ -9,21 +9,25 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class BackgroundWorker extends SwingWorker<TableModel, TableModel> {
+public class BackgroundWorker extends SwingWorker<TableModel, TableModel> 
+{
     private final JTable tabler;
     private DBCon  gui;
     private String tablename;
-    public BackgroundWorker(JTable table,DBCon gui, String tablename){
+    public BackgroundWorker(JTable table, DBCon gui, String tablename)
+	{
         this.tabler = table;
         this.gui = gui; // to call the resultset!
         this.tablename = tablename;
     }
 
     @Override
-    protected TableModel doInBackground() throws Exception {
+    protected TableModel doInBackground() throws Exception 
+	{
        Vector data =  new Vector();
        Vector colum = new Vector();
-       try {
+       try 
+	   {
            ResultSet rs; // = gui.getRs();
            ResultSetMetaData rsmd = gui.getRsmd();
            //Method gets all the records and returns result set.
@@ -31,38 +35,47 @@ public class BackgroundWorker extends SwingWorker<TableModel, TableModel> {
            rs = gui.getAllRecords(tablename);
            rsmd = rs.getMetaData();
            int columCount = rsmd.getColumnCount();
-           for (int i = 1; i < columCount; i++){
+           for (int i = 1; i < columCount; i++)
+		   {
                colum.add(rsmd.getColumnName(i));
            }
 
            Vector row;
-           while (rs.next()){
+           while (rs.next())
+		   {
              row = new Vector(columCount);
-             for (int y = 1; y < columCount; y++){
+             for (int y = 1; y < columCount; y++)
+			 {
                 row.add(rs.getString(y));
              }
              data.add(row);
            }
 
 
-       }catch(SQLException e){
+       }
+	   catch(SQLException e)
+	   {
             e.printStackTrace();
        }
-
-        DefaultTableModel model = new DefaultTableModel(data,colum);
-        return model;
+	   DefaultTableModel model = new DefaultTableModel(data, colum);
+	   return model;
     }
+
    @Override
-    protected void done(){
-       try {
+    protected void done()
+	{
+       try 
+	   {
            TableModel model = get();
            this.tabler.setModel(model);
-       } catch (InterruptedException e) {
-           e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-       } catch (ExecutionException e) {
-           e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-       }
-
-
+       } 
+	   catch (InterruptedException e) 
+	   {
+           e.printStackTrace();
+       } 
+	   catch (ExecutionException e) 
+	   {
+           e.printStackTrace();
+	   }
    }
 }

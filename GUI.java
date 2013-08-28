@@ -66,11 +66,6 @@ public class GUI extends JFrame implements ActionListener
         mHelp.add(miAbout);
         mBar.add(mHelp);
 
-        //Adding Action Listeners
-        //and adding a WindowListener to
-        //check on the window status.
-        //we don't want the con to be open constantly
-        //if you get what i mean
         miAbout.addActionListener(this);
         addWindowListener(new WindowAdapter()
         {
@@ -103,19 +98,22 @@ public class GUI extends JFrame implements ActionListener
         }
 		catch(NullPointerException nulle)
 		{
-			System.out.println(elol.getMessage());
+			System.out.println(nulle.getMessage());
 		}
         final String table[] = new String[tableNo + 1];
         table[0] = "Select a Table";
         int i=0;
-        try{
+        try
+		{
             rs = con.md.getTables(null, null, "%", null);
-            while(rs.next()){
-
+            while(rs.next())
+			{
                 table[i+1] = rs.getString(3);
                 i++;
             }
-        }catch(SQLException sqle){
+        }
+		catch(SQLException sqle)
+		{
             System.out.println(sqle);
         }
 

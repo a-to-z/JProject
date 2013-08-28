@@ -10,19 +10,23 @@ public class DBCon
     private Properties p;
     private Statement st;
 
-    public Statement getSt() {
+    public Statement getSt()
+	{
         return st;
     }
 
-    public ResultSet getRs() {
+    public ResultSet getRs() 
+	{
         return rs;
     }
 
-    public ResultSetMetaData getRsmd() {
+    public ResultSetMetaData getRsmd() 
+	{
         return rsmd;
     }
 
-    public DatabaseMetaData getMd() {
+    public DatabaseMetaData getMd() 
+	{
         return md;
     }
 
@@ -43,51 +47,15 @@ public class DBCon
     }
     public ResultSet getAllRecords(String table) throws SQLException
     {
-    	//Method gets all the records and returns result set.
-    		String query = "SELECT * FROM " + table + ";";
-    	     rs = st.executeQuery(query);
-    	     int rec = 0;
-    	     /*while(rs.next())
-    	     {
-    	      if(table.equals("class1") ||
-    	         table.equals("class2") ||
-    	         table.equals("class3") ||
-    	         table.equals("class4") ||
-    	         table.equals("class5"))
-    	      {
-    	        System.out.println("-------------------------------------------");
-    	        System.out.println("Record #" + (rec+1) + ":");
-    	        System.out.println("ID:   " + rs.getString("ID") + "\n" +
-    	                   "First Name: " + rs.getString("FNAME") + "\n" + 
-    	                   "Last Name: " + rs.getString("LNAME") + "\n" +
-    	                   "Address: " + rs.getString("ADDRESS") + "\n" +
-    	                      "Marks: " + rs.getString("MARKS") + "\n" +
-    	                       "Contact Info: " + rs.getString("CONTACT"));
-    	      }
-    	      else
-    	      {
-    	    	  //This will display for literaly any other table
-    	    	  rsmd = rs.getMetaData();
-    	    	  String[] columnnames;
-    	
-    	    	  System.out.println("-------------------------------------------");
-    	    	  System.out.println("Record #" + (rec + 1) + ": ");
-    	    	  for(int i = 0; i < rsmd.getColumnCount(); i++)
-    	    	  {
-    	    		  System.out.println(rsmd.getColumnName(i) + ": " + 
-    	              rs.getString(rsmd.getColumnName(i)));
-    	    	  }
-    	      }
-    	      rec++;
-    	     }*/
-    	     System.out.println("-------------------------------------------");
-    	     System.out.println("All Records Displayed Successfully!");
-    	     System.out.println("-------------------------------------------");
-    	     return rs;
+		//Method gets all the records and returns result set.
+		String query = "SELECT * FROM " + table + ";";
+		rs = st.executeQuery(query);
+		System.out.println("All Records Displayed Successfully!");
+		System.out.println("-------------------------------------------");
+		return rs;
     }
     public void closeConnection() throws SQLException
     {
-        //Fancy way of closing the con lol
         c.close();
     }
     public void setRecord(String table, String[] items) throws SQLException
