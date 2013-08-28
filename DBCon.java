@@ -36,7 +36,7 @@ public class DBCon
         Class.forName(dbClassName);
         p = new Properties();
         p.put("user", "root");
-        p.put("password", "zero");
+        p.put("password", "root");
         c = DriverManager.getConnection(CONNECTION, p);
         st = c.createStatement();
         md = c.getMetaData();

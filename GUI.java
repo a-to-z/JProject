@@ -92,12 +92,19 @@ public class GUI extends JFrame implements ActionListener
         });
 
         int tableNo=0;
-        try{
+        try
+		{
             rs = con.md.getTables(null, null, "%", null);
             tableNo = rs.getMetaData().getColumnCount();
-        }catch(SQLException sqle){
+        }
+		catch(SQLException sqle)
+		{
             System.out.println(sqle);
         }
+		catch(NullPointerException nulle)
+		{
+			System.out.println(elol.getMessage());
+		}
         final String table[] = new String[tableNo + 1];
         table[0] = "Select a Table";
         int i=0;
